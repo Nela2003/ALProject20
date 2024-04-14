@@ -63,7 +63,7 @@ codeunit 50133 "Check Reservation Entries"{
             ReservationEntry1."Reservation Status":=Reservation."Reservation Status";
             ReservationEntry1.Insert();
             Reservation."Entry No." := Reservation."Entry No." +1;
-             ReservationEntry1."Entry No." := ReservationEntry1."Entry No." +1;
+             ReservationEntry1."Entry No." := Reservation."Entry No.";
 
             // Page.Run(Page::"Reservation Entries",ReservationEntry1);
             until Reservation.Next()=0;
