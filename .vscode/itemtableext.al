@@ -4,21 +4,25 @@ tableextension 50130 "item table ext" extends Item
     {
         field(50130;"Sasia e disponueshme";Decimal )
         {    Caption='Sasia e disponueshme';
+              Editable=false;
             
-            DataClassification = ToBeClassified;
-          
-        }
+              }
+
+              field(50131;"Sasia e disponueshmee"; Integer)
+              {
+               
+                   
+              }
     }
+           
+            
+        
 
-    procedure sasia();
-    begin 
-
-    end;
-    
-//////////
    
     
-    
+
     var
         myInt: Integer;
-}
+        
+        }
+   

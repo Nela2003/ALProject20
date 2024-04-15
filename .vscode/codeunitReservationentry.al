@@ -36,7 +36,7 @@ codeunit 50133 "Check Reservation Entries"{
           
         END;
 
-        ///////////////////////////
+     
           procedure CheckReservation2(SalesLine:Record "Sales Line")
     var
         InventoryWarehouse: Record Inventory52;
@@ -71,20 +71,7 @@ codeunit 50133 "Check Reservation Entries"{
             ReservationEntry1.Insert();
             Reservation."Entry No.":=Reservation."Entry No."+1;
          
-            //////////
-
-            //  Testvariable."Entry No.":=Reservation."Entry No.";
-            // Testvariable."Item No.":=Reservation."Item No.";
-            //  Testvariable."Location Code":=Reservation."Location Code";
-            // Testvariable."Quantity (Base)":=Reservation."Quantity (Base)";
-            // Testvariable."Transferred from Entry No.":=Reservation."Transferred from Entry No.";
-            // Testvariable."Reservation Status":=Reservation."Reservation Status";
-            // Testvariable.Insert();
-            // Testvariable."Entry No." := Reservation."Entry No." +1;
-
-            //  ReservationEntry1."Entry No." := Reservation."Entry No.";
-
-            // Page.Run(Page::"Reservation Entries",ReservationEntry1);
+          
             until Reservation.Next()=0;
              Page.Run(497,ReservationEntry1);
        
@@ -108,13 +95,10 @@ codeunit 50133 "Check Reservation Entries"{
           
         END;
 
-////////////
 
-procedure sasiaedisponueshme(SalesLine:Record "Sales Line");
-begin
 
-end;
+
          
-    
+   
 }
 
