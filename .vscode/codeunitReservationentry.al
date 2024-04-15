@@ -4,6 +4,7 @@ codeunit 50133 "Check Reservation Entries"{
     var
         InventoryWarehouse: Record Inventory52;
         Reservation:Record "Reservation Entry";
+        Testvariable:Record "Test Table";
     
      
         
@@ -41,7 +42,8 @@ codeunit 50133 "Check Reservation Entries"{
         InventoryWarehouse: Record Inventory52;
         Reservation:Record "Reservation Entry";
         ReservationEntry1:Record "Reservation Entry" temporary;
-    
+            Testvariable:Record "Test Table";
+          page1:Page "Reservation Entries";
      
         
     begin
@@ -52,22 +54,39 @@ codeunit 50133 "Check Reservation Entries"{
 
          
 
-        if  Reservation.FindSet() Then begin
+        if  Reservation.FindSet() Then  begin
             repeat
-            Clear(ReservationEntry1);
+           
+             clear(ReservationEntry1);
+          
+          
+            ReservationEntry1."Entry No.":=Reservation."Entry No.";
             ReservationEntry1."Item No.":=Reservation."Item No.";
             ReservationEntry1."Location Code":=Reservation."Location Code";
             ReservationEntry1."Quantity (Base)":=Reservation."Quantity (Base)";
-            ReservationEntry1."Entry No.":=Reservation."Entry No.";
             ReservationEntry1."Transferred from Entry No.":=Reservation."Transferred from Entry No.";
             ReservationEntry1."Reservation Status":=Reservation."Reservation Status";
+            Reservation.Positive:= false;
+            ReservationEntry1.Positive:=Reservation.Positive;
             ReservationEntry1.Insert();
-            Reservation."Entry No." := Reservation."Entry No." +1;
-             ReservationEntry1."Entry No." := Reservation."Entry No.";
+            Reservation."Entry No.":=Reservation."Entry No."+1;
+         
+            //////////
+
+            //  Testvariable."Entry No.":=Reservation."Entry No.";
+            // Testvariable."Item No.":=Reservation."Item No.";
+            //  Testvariable."Location Code":=Reservation."Location Code";
+            // Testvariable."Quantity (Base)":=Reservation."Quantity (Base)";
+            // Testvariable."Transferred from Entry No.":=Reservation."Transferred from Entry No.";
+            // Testvariable."Reservation Status":=Reservation."Reservation Status";
+            // Testvariable.Insert();
+            // Testvariable."Entry No." := Reservation."Entry No." +1;
+
+            //  ReservationEntry1."Entry No." := Reservation."Entry No.";
 
             // Page.Run(Page::"Reservation Entries",ReservationEntry1);
             until Reservation.Next()=0;
-             Page.Run(Page::"Reservation Entries",ReservationEntry1);
+             Page.Run(497,ReservationEntry1);
        
          
             
@@ -89,7 +108,12 @@ codeunit 50133 "Check Reservation Entries"{
           
         END;
 
+////////////
 
+procedure sasiaedisponueshme(SalesLine:Record "Sales Line");
+begin
+
+end;
          
     
 }
