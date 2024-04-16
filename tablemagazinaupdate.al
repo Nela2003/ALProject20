@@ -38,7 +38,13 @@ table 50161 "Inventory52"
         }
         field(6;Inventory;Integer){
             caption='Inventory';
-            TableRelation=Item.Inventory;
+            TableRelation=Item."Sasia e disponueshme";
+            ///nga Item.Inventory ne Item.Sasia e disponueshme
+        }
+        field(7;"Artikulli"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation=Item.Description;
         }
     }
     

@@ -27,13 +27,16 @@ codeunit 50130 "InventoryCheck"
         MinQuantity:=InventoryWarehouse."Gjendja minimum";
         MaxQuantity:=InventoryWarehouse."Gjendja max";
         Inventory:=InventoryWarehouse.Inventory;
-         IF SalesLine.Quantity < Inventory THEN 
-              
-                Error('You are under inventory')
+         IF InventoryWarehouse.Inventory-SalesLine.Quantity<MinQuantity THEN 
+               if   SalesLine."Location Code"=' 'then 
 
+                Error('Ju keni tejkaluar sasine minimum te artikullit'+InventoryWarehouse.Artikulli+InventoryWarehouse.Magazina)
+                else if   SalesLine."Location Code"<>' ' then 
+                 
+                  Error('Ju keni tejkaluar sasine minimum te artikullit' +SalesLine.Description+' ne magazinen '+InventoryWarehouse.Magazina)
             //  Inventory:=Item.Inventory;
-            else  if SalesLine.Quantity >Inventory then
-             Error('You are above inventory');
+            // else  if SalesLine.Quantity >Inventory then
+            //  Error('You are above inventory');
             
             
           
