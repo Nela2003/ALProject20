@@ -38,7 +38,7 @@ table 50130 "Inventory"
     
     keys
     {
-        key(Key1; "Kodi i Artikullit")
+        key(Key1; "Kodi i Artikullit",Magazina)
         {
             Clustered = true;
         }

@@ -54,7 +54,7 @@ pageextension 50144 "Item avail page ext" extends "Item Avail. by Location Lines
   
         //    // LocationCode1:=Rec.
        
-            LocationCode1:=Rec.Code ;
+            // LocationCode1:=Rec.Code ;
             
             
         //     ITemno1:=Item."No.";
@@ -94,15 +94,15 @@ pageextension 50144 "Item avail page ext" extends "Item Avail. by Location Lines
              If Item.FindFirst() then 
              SetItemFilter();
              ItemAvailFormsMgt.ShowItemLedgerEntries(Item,false);
-            Item4.SetRange("Item No.",Item4."Item No.");
-Item4.SetRange("Location Code",'M6');
+            // Item4.SetRange("Item No.",Item4."Item No.");
+// Item4.SetRange("Location Code",'M6');
 If Item4.FindSet() then begin
  Quant:=0;
     repeat
     Quant:=Quant+Item4.Quantity;
         
     until Item4.Next() = 0;
-    Message('%1',Quant);
+   
 end;
              ItemLedgerEntries.Close();
              ItemLedgerEntries.Update(true);
@@ -213,7 +213,7 @@ end;
 
 
 
-
+       Page.Run(Page::"Item Avail. by Location Lines");
         //////////////////////////
           
         //    until Item4.Next()=0;

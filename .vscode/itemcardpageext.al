@@ -37,6 +37,7 @@ pageextension 50136  "item card extension" extends "Item Card"
 
         
         Reservation1.SetRange("Item No.",Itemno);
+      
   
 
          

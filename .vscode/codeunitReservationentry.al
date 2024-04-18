@@ -66,7 +66,7 @@ codeunit 50133 "Check Reservation Entries"{
             ReservationEntry1."Quantity (Base)":=Reservation."Quantity (Base)";
             ReservationEntry1."Transferred from Entry No.":=Reservation."Transferred from Entry No.";
             ReservationEntry1."Reservation Status":=Reservation."Reservation Status";
-            Reservation.Positive:= false;
+            Reservation.Positive:= true;
             ReservationEntry1.Positive:=Reservation.Positive;
             ReservationEntry1.Insert();
             Reservation."Entry No.":=Reservation."Entry No."+1;

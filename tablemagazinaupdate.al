@@ -6,6 +6,7 @@ table 50161 "Inventory52"
     LookupPageId = "Magazine list";
     DrillDownPageId = "Magazine list";
 
+
     fields
     {
         field(1; "Kodi i Artikullit"; Code[20])
@@ -45,6 +46,10 @@ table 50161 "Inventory52"
         {
             DataClassification = ToBeClassified;
             TableRelation=Item.Description;
+        }
+        field(8; "Sasia e disponueshme ITL"; Decimal)
+        {
+            DataClassification = ToBeClassified;
         }
     }
     
