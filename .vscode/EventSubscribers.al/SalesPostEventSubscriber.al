@@ -11,11 +11,10 @@ codeunit 50132 "Events"
         Inventory:Decimal;
     begin
         SalesLine.SetRange("Document No.",SalesHeader."No.");
-        if SalesLine.FindFirst() then begin 
-         Number:=SalesLine."No.";
-         LocationCode:=SalesLine."Location Code";
-         InventoryWarehouse.SetRange("Kodi i Artikullit",Number);
-         InventoryWarehouse.SetRange("Magazina",LocationCode);
+        if SalesLine.FindSet() then begin 
+          repeat
+         InventoryWarehouse.SetRange("Kodi i Artikullit",SalesLine."No.");
+         InventoryWarehouse.SetRange("Magazina",SalesLine."Location Code");
            IF InventoryWarehouse.FindFirst() Then begin
              MinQuantity:=InventoryWarehouse."Gjendja minimum";
              Item.setRange("No.",SalesLine."No.") ;
@@ -25,15 +24,15 @@ codeunit 50132 "Events"
                 end;
                 If SalesLine."Location Code"<>'' then begin 
                    if  Inventory-SalesLine.Quantity<=MinQuantity then begin
-                     Error('Ju keni tejkaluar sasine minimum te artikullit' +SalesLine.Description+' ne magazinen '+InventoryWarehouse.Magazina);
+                     Error('Ju keni tejkaluar sasine minimum te artikullit ' +SalesLine.Description+' ne magazinen '+InventoryWarehouse.Magazina);
                    end
                 end
             else begin
                 if SalesLine.Quantity>Inventory  then 
-                  Error('Ju keni tejkaluar sasine maximum te artikullit  '+InventoryWarehouse.Artikulli);
+                  Error('Ju keni tejkaluar sasine minimum '+SalesLine.Description);
             end;
           END 
-            
+            until SalesLine.Next()=0;
         end;
       
     end;

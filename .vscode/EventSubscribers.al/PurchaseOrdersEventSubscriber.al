@@ -3,7 +3,6 @@ codeunit 50130 "Purchase Event Sub"
    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Purch.-Post (Yes/No)", 'OnBeforeRunPurchPost', '', true, true)]
    local procedure MyProcedure(var PurchaseHeader: Record "Purchase Header")
    var InventoryWarehouse: Record Inventory52;
-        MaxQuantity:Decimal;
         LocationCode: Code[10];
         Number:Code[20];
         PurchaseLine:Record "Purchase Line";
@@ -13,38 +12,37 @@ codeunit 50130 "Purchase Event Sub"
    
    begin
      PurchaseLine.SetRange("Document No.",PurchaseHeader."No.");
-        if PurchaseLine.FindFirst() then begin 
-         Number:=PurchaseLine."No.";
-         LocationCode:=PurchaseLine."Location Code";
-         InventoryWarehouse.SetRange("Kodi i Artikullit",Number);
-         InventoryWarehouse.SetRange("Magazina",LocationCode);
+     PurchaseLine.SetRange("Document Type",PurchaseHeader."Document Type");
+        if PurchaseLine.FindSet() then begin 
+          repeat
+         InventoryWarehouse.SetRange("Kodi i Artikullit",PurchaseLine."No.");
+         InventoryWarehouse.SetRange("Magazina",PurchaseLine."Location Code");
            IF InventoryWarehouse.FindFirst() Then begin
-           MaxQuantity:=InventoryWarehouse."Gjendja max";
            Item.setRange("No.",PurchaseLine."No.") ;
-           location.SetRange(Code,LocationCode);
-           location.SetRange("Item No",PurchaseLine."No.");
-              if location.FindFirst() then begin 
-                Inventory:=Item.Inventory;
-              end;
+               If Item.FindFirst() then begin 
+                 Item.CalcFields(Inventory);
+                 Inventory:=Item.Inventory;
+                end;
       
               If PurchaseLine."Location Code"<>'' then begin 
-                if  Inventory+PurchaseLine.Quantity>=MaxQuantity then begin
+                if  Inventory+PurchaseLine.Quantity>=InventoryWarehouse."Gjendja max" then begin
                     Error('Ju keni tejkaluar sasine maximale te' +PurchaseLine.Description+' ne magazinen '+InventoryWarehouse.Magazina);
                 end
             end
             else begin
-                InventoryWarehouse.CalcFields(MaxInventoryinWarehouse);
-                if Inventory+PurchaseLine.Quantity>InventoryWarehouse.MaxInventoryinWarehouse then begin
-                Error('Ju keni tejkaluar sasine maximale te te gjitha magazinave ');
+               
+             if Inventory+PurchaseLine.Quantity>InventoryWarehouse."Gjendja max" then begin
+                Error('Ju keni tejkaluar sasine maximale te artikullit ne nivel total inventari per artikullin '+PurchaseLine.Description);
                 end;
             end;
+   end;
             
             
             
-          
-            END 
+          until  PurchaseLine.Next()=0;
+            END;
             
         end;
-   end;
+   
     
 }

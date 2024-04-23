@@ -26,7 +26,11 @@ page 50131 "Magazine list"
             field("Gjendja max";Rec."Gjendja max"){
                 ApplicationArea=all;
             }
+               field("Sasia e disponueshme ITL";Rec."Sasia e disponueshme ITL"){
+                    ApplicationArea=all;
+                }
             }
+            
         }
         area(Factboxes)
         {

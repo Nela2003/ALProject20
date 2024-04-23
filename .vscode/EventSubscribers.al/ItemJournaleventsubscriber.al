@@ -22,48 +22,29 @@ codeunit 50135 "Item Journal"
              end;
         case ItemJournalLine."Entry Type" of
        "Item Ledger Entry Type"::"Positive Adjmt.":
-       If ItemJournalLine."Location Code"<>'' then begin 
+            
                 if  Inventory+ItemJournalLine.Quantity>=MaxQuantity then 
                     Error(labelmax);
-                end
-            else begin
-                InventoryWarehouse.CalcFields(MaxInventoryinWarehouse);
-                if Inventory+ItemJournalLine.Quantity>InventoryWarehouse.MaxInventoryinWarehouse then begin
-                Error('Ju keni tejkaluar sasine maximale te te gjitha magazinave ');
-                end;
-            end;
+                
+            
          "Item Ledger Entry Type"::Purchase:
-            If ItemJournalLine."Location Code"<>'' then begin 
+           
                 if  Inventory+ItemJournalLine.Quantity>=MaxQuantity then begin
                     Error(labelmax);
-                end
-            end
-            else begin
-                InventoryWarehouse.CalcFields(MaxInventoryinWarehouse);
-                if Inventory+ItemJournalLine.Quantity>InventoryWarehouse.MaxInventoryinWarehouse then begin
-                Error('Ju keni tejkaluar sasine maximale te te gjitha magazinave ');
                 end;
-            end;
+        
+            
          "Item Ledger Entry Type"::"Negative Adjmt.":
-            If ItemJournalLine."Location Code"<>'' then begin 
+            
                 if  Inventory-ItemJournalLine.Quantity<=MinQuantity then begin
                      Error('Ju keni tejkaluar sasine minimum te artikullit ' +ItemJournalLine.Description+' ne magazinen  '+InventoryWarehouse.Magazina);
-                end
-            end
-            else begin
-                if ItemJournalLine.Quantity>Inventory  then 
-                  Error('Ju keni tejkaluar sasine maximum te artikullit  '+InventoryWarehouse.Artikulli);
-            end;
+                end;
+          
          "Item Ledger Entry Type"::Sale:
-        If ItemJournalLine."Location Code"<>'' then begin 
-                if  Inventory-ItemJournalLine.Quantity<=MinQuantity then begin
+       
+                if  Inventory-ItemJournalLine.Quantity<=MinQuantity then 
                      Error('Ju keni tejkaluar sasine minimum te artikullit' +ItemJournalLine.Description+' ne magazinen '+InventoryWarehouse.Magazina);
-                end
-            end
-            else begin
-                if ItemJournalLine.Quantity>Inventory  then 
-                  Error('Ju keni tejkaluar sasine maximum te artikullit  '+InventoryWarehouse.Artikulli);
-            end;
+          
         end;
     end;
     

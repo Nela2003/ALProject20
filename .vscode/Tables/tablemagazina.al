@@ -41,11 +41,7 @@ table 50161 "Inventory52"
         {
             DataClassification = ToBeClassified;
         }
-        field(9; MaxInventoryinWarehouse; Integer)
-        {  
-           FieldClass=FlowField;
-           CalcFormula=sum(Inventory52."Gjendja max" where(Magazina=field(Magazina)));
-        }
+        
     }
     
     keys

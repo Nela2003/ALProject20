@@ -30,6 +30,9 @@ page 50130 "Inventory Page"
                 {  ApplicationArea=All;
 
                 }
+                field("Sasia e disponueshme ITL";Rec."Sasia e disponueshme ITL"){
+                    ApplicationArea=all;
+                }
 
 
 
